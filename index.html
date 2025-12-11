@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد ميلاد سعيد يا لارا! ⚜️</title>
+    
+    <meta property="og:title" content="عيد ميلاد سعيد يا لارا! 🎂">
+    <meta property="og:description" content="صفحة خاصة مُهداة من أخوكي عمر بمناسبة يوم ميلادك. كل عام وأنتِ بخير!">
+    <meta property="og:image" content="lara_image.jpg"> 
+    <meta property="og:type" content="website">
+
+    <style>
+        /* التنسيقات العامة والمحسّنة للموبايل */
+        body {
+            font-family: 'Georgia', serif; 
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5F5; /* لون كريمي فاتح */
+            color: #333;
+            text-align: center;
+            line-height: 1.8;
+            direction: rtl; 
+            overflow-x: hidden; 
+        }
+
+        /* تنسيق لتضخيم الأسماء في سطر واحد (الذهبي الداكن) */
+        .name-highlight {
+            font-size: 1.3em; 
+            font-weight: 900; 
+            color: #A87D32; /* ذهبي داكن وأنيق */
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: #333333; /* أسود داكن */
+            color: white;
+            padding: 25px 0 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-bottom: 5px solid #A87D32; /* خط ذهبي فاخر */
+        }
+
+        h1 {
+            font-size: 2.2em; 
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        /* قسم الصورة الشخصية مع تعديل خاص لعدم وجود صورة */
+        .profile-section {
+            padding: 40px 10px;
+            background-color: white;
+        }
+
+        .profile-img-container {
+            width: 220px; 
+            height: 220px;
+            border-radius: 50%; 
+            border: 5px solid #333333; 
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            background-color: #F0F0F0; /* خلفية فاتحة بدلاً من الصورة */
+            color: #A87D32; /* لون الأيقونة */
+            font-size: 3em; /* تم تصغير الخط قليلاً ليكون الاسم واضحًا */
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* لإضافة الصورة عند توفرها لاحقًا */
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0; /* إخفاء الصورة مبدئيًا */
+            transition: opacity 0.3s;
+        }
+        
+        /* ملاحظة الصورة */
+        .image-note {
+            font-size: 0.8em;
+            color: #555;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* قسم العد التنازلي */
+        .countdown-section {
+            background-color: #1a1a1a; 
+            color: #E0C792; 
+            padding: 30px 10px;
+        }
+
+        .countdown-section h2 {
+            font-size: 1.4em;
+            color: #E0C792;
+        }
+
+        #countdown {
+            font-family: 'Times New Roman', Times, serif; 
+            font-size: 3em; 
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        /* قسم الرسالة */
+        .message-section {
+            padding: 30px 15px;
+            background-color: #FFFFFF; 
+            border-top: 2px solid #E0C792; 
+        }
+
+        .message-box {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: right;
+        }
+        
+        .message-box h3 {
+            color: #A87D32; 
+            font-size: 1.6em;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #E0C792;
+            padding-bottom: 10px;
+        }
+
+        /* **** قسم بطاقة الهدية (المتجر) - التعديل حسب طلبك **** */
+        .gift-card-section {
+            padding: 40px 15px;
+            background-color: #444444; /* رمادي غامق */
+            color: #FFFFFF;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-top: 5px solid #A87D32; /* خط ذهبي */
+            transition: background-color 0.3s ease;
+        }
+
+        .gift-card-section:hover {
+             background-color: #555555; /* تظليل عند المرور */
+        }
+        
+        .gift-card-section h3 {
+            font-size: 1.8em;
+            margin: 0 0 10px 0;
+            color: #E0C792; /* ذهبي فاتح */
+            text-shadow: none;
+        }
+
+        /* تمت إزالة الستايل الخاص بالـ p من هنا، وسيتم وضعه في الـ HTML مباشرة كما طلبت */
+
+        .gift-card-button {
+            background-color: #A87D32; /* ذهبي داكن */
+            color: white;
+            border: 2px solid white;
+            padding: 12px 25px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s;
+        }
+
+        .gift-card-button:hover {
+            background-color: #795e2d;
+        }
+        
+        /* الفوتر */
+        footer {
+            padding: 15px;
+            background-color: #333333;
+            color: #E0C792;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>عيد ميلاد سعيد يا أحلى <span class="name-highlight" style="color: white;">لارا</span>!</h1>
+        <p>صفحة خاصة مُهداة من أخوكي <span class="name-highlight" style="color: white;">عمر</span> بمناسبة ميلادك الـ **12 ديسمبر** ⚜️</p>
+    </header>
+
+    <div class="profile-section">
+        <h2>يا زينة اللحظات الحلوة!</h2>
+        
+        <div class="profile-img-container" title="مكان الصورة">
+             وش لارا
+            </div>
+        <p class="image-note">
+            (انتي مش حاطه صوره احط صورتي انا يعني ولا ايي )
+        </p>
+
+        <p style="margin-top: 20px;">الأخت التي لا تُعوض</p>
+    </div>
+
+    <a href="lara_wish.html" style="text-decoration: none;">
+        <div class="gift-card-section">
+            <h3>📜 دعوة حصرية من متجر عمر 📜</h3>
+            <p style="color: #E0C792;">لديك فرصة للحصول على **أمنية خاصة** تتحقق بمجرد تسجيلها!</p>
+            <div class="gift-card-button">اطلب الهدية الآن</div>
+        </div>
+    </a>
+
+    <div class="countdown-section">
+        <h2 id="countdown-title">العد التنازلي ليوم **12 ديسمبر** (يوم ميلادك الرسمي)</h2>
+        <p id="countdown">... جاري التحميل ...</p>
+    </div>
+
+    <div class="message-section">
+        <div class="message-box">
+            <h3>رسالة خاصة مني أنا (<span class="name-highlight" style="font-size: 1.2em;">عمر</span>)</h3>
+            <p>
+                <strong><span class="name-highlight" style="font-size: 1.5em; display: block; text-align: right; color: #333333;">لارا،</span></strong>
+            </p>
+            <p>
+                أتمنى لكِ في عامكِ الجديد كل التوفيق والسعادة التي تليق بجمال روحك، وأن تحققي كل أحلامك وطموحاتك. كوني دايماً مشرقة ومتميزة كما أنتِ.
+            </p>
+            <p style="font-style: italic; margin-top: 20px; text-align: center; color: #555;">
+                "الأخت هي قطعة من الأب ودفء من الأم وسند من الحياة."
+            </p>
+            <p style="text-align: center;"><strong>بإخلاص ومحبة أبدية، عمر ⚜️</strong></p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; تم عمل هذا الموقع خصيصًا لـ <span class="name-highlight" style="font-size: 1em; color: #E0C792;">لارا</span>. كل عام وأنتِ بقمة الخير والجمال!
+    </footer>
+    
+    <script>
+        const targetDate = new Date("December 12, 2025 00:00:00").getTime();
+        const countdownElement = document.getElementById("countdown");
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                countdownElement.innerHTML = 
+                    days + " يوم و " + hours + " ساعة و " + 
+                    minutes + " دقيقة و " + seconds + " ثانية ";
+                
+            } else {
+                countdownElement.innerHTML = "اليوم هو عيد ميلادك! 🎉🥳";
+                clearInterval(countdownFunction); 
+            }
+        }
+
+        updateCountdown(); 
+        const countdownFunction = setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
