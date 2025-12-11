@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر أمنيات لارا ⚜️</title>
+    
+    <style>
+        body {
+            font-family: 'Georgia', serif; 
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5F5;
+            color: #333;
+            text-align: center;
+            line-height: 1.6;
+            direction: rtl; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .store-header {
+            background-color: #333333;
+            color: #E0C792;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            font-size: 1.4em;
+            font-weight: bold;
+            border-bottom: 2px solid #A87D32;
+        }
+
+        .wish-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            width: 450px;
+            border: 1px solid #ddd;
+        }
+
+        .wish-body {
+            padding: 30px;
+        }
+
+        .wish-container h3 {
+            color: #A87D32;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .wish-container textarea {
+            width: 95%;
+            height: 120px;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border: 1px solid #A87D32; 
+            resize: vertical;
+            font-size: 1em;
+            font-family: 'Georgia', serif;
+            background-color: #fcfcfc; 
+            color: #555;
+            transition: background-color 0.3s;
+        }
+
+        .wish-container textarea:focus:not([readonly]) {
+             background-color: white;
+             border-color: #333333;
+        }
+        
+        .wish-container button {
+            background-color: #333333; 
+            color: white;
+            border: 2px solid #A87D32;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-family: 'Georgia', serif;
+            transition: background-color 0.3s;
+            margin: 5px; /* مسافة بين الأزرار */
+        }
+        
+        .wish-container button:hover {
+            background-color: #555555;
+        }
+        
+        /* زر الإلغاء */
+        #reset-wish-button {
+            background-color: #A87D32; /* لون ذهبي داكن */
+            border-color: #E0C792;
+            color: white;
+            display: none; /* يتم عرضه فقط عندما تكون الأمنية مسجلة */
+        }
+        
+        #reset-wish-button:hover {
+             background-color: #795e2d;
+        }
+
+        /* رسالة التأكيد بعد الإرسال */
+        #wish-status {
+            color: #333333;
+            font-weight: bold;
+            display: none;
+            margin-top: 25px;
+            border: 1px solid #A87D32;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #E0C792; 
+        }
+        
+        /* زر العودة للموقع الرئيسي */
+        .back-button {
+            display: block;
+            margin-top: 25px;
+            color: #A87D32;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body onload="loadWish()">
+
+    <div class="wish-container">
+        <div class="store-header">
+             ⚜️ متجر الأمنيات لـ لارا ⚜️
+        </div>
+        
+        <div class="wish-body">
+            <h3>📜 سجل أمنيتك الآن 📜</h3>
+            <p id="prompt-text" style="color: #555;">أمنيَتُك هي سِرّ الهدية! اكتبيها هنا وسأعمل على تحقيقها:</p>
+            
+            <textarea id="lara-wish-input" placeholder="اكتبي أمنيتك هنا..." maxlength="200" dir="rtl"></textarea>
+            
+            <div class="buttons-group">
+                <button id="send-wish-button" onclick="saveWish()">تسجيل الأمنية</button>
+                <button id="reset-wish-button" onclick="resetWish()">إلغاء الأمنية وتعديلها</button>
+            </div>
+            
+            <p id="wish-status">
+                تم تثبيت الطلب بنجاح! الأمنية مسجلة في الخانة أعلاه ونتمنى أن تتحقق قريباً. 💖
+            </p>
+
+            <a href="lara_main.html" class="back-button">↩️ العودة إلى صفحة عيد الميلاد</a>
+        </div>
+    </div>
+
+    <script>
+        const WISH_KEY = 'lara_birthday_wish';
+        const wishTextarea = document.getElementById('lara-wish-input');
+        const statusElement = document.getElementById('wish-status');
+        const sendButton = document.getElementById('send-wish-button');
+        const resetButton = document.getElementById('reset-wish-button');
+        const promptText = document.getElementById('prompt-text');
+        
+        // دالة يتم استدعاؤها عند تحميل الصفحة
+        function loadWish() {
+            const savedWish = localStorage.getItem(WISH_KEY);
+            
+            if (savedWish) {
+                // حالة: الأمنية مسجلة
+                wishTextarea.value = savedWish;
+                wishTextarea.readOnly = true;
+                
+                sendButton.style.display = 'none'; // إخفاء زر التسجيل
+                resetButton.style.display = 'inline-block'; // إظهار زر الإلغاء
+                statusElement.style.display = 'block';
+                promptText.textContent = 'الأمنية المسجلة هي: (غير قابلة للتعديل)';
+
+            } else {
+                // حالة: لا توجد أمنية مسجلة
+                statusElement.style.display = 'none';
+                resetButton.style.display = 'none';
+                sendButton.style.display = 'inline-block';
+                wishTextarea.readOnly = false;
+            }
+        }
+        
+        // دالة حفظ الأمنية
+        function saveWish() {
+            const wishText = wishTextarea.value.trim();
+            
+            if (wishText !== "") {
+                localStorage.setItem(WISH_KEY, wishText);
+                
+                // تحديث واجهة المستخدم بعد الحفظ
+                wishTextarea.readOnly = true;
+                sendButton.style.display = 'none';
+                resetButton.style.display = 'inline-block';
+                statusElement.style.display = 'block';
+                promptText.textContent = 'الأمنية المسجلة هي: (غير قابلة للتعديل)';
+                
+            } else {
+                alert("برجاء كتابة الأمنية أولاً يا لارا!");
+            }
+        }
+        
+        // دالة إلغاء الأمنية
+        function resetWish() {
+            // سؤال تأكيدي (اختياري)
+            const confirmation = confirm("هل أنت متأكدة من إلغاء الأمنية وتعديلها؟");
+            
+            if (confirmation) {
+                // 1. حذف الأمنية من المتصفح
+                localStorage.removeItem(WISH_KEY);
+                
+                // 2. إعادة تحميل الصفحة (أسهل طريقة للعودة إلى حالة الإدخال)
+                window.location.reload(); 
+            }
+        }
+    </script>
+
+</body>
+</html>
